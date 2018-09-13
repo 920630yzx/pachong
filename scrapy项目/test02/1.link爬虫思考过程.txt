@@ -1,0 +1,45 @@
+﻿scrapy crawl link01  --nolog
+scrapy crawl link02  --nolog
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+allow（正则表达式（或的列表）） - 一个单一的正则表达式（或正则表达式列表），（绝对）urls必须匹配才能提取。
+如果没有给出（或为空），它将匹配所有链接。
+
+deny（正则表达式或正则表达式列表） - 一个正则表达式（或正则表达式列表），（绝对）urls必须匹配才能排除（即不提取）。
+它优先于allow参数。如果没有给出（或为空），它不会排除任何链接。
+
+allow_domains（str或list） - 单个值或包含将被考虑用于提取链接的域的字符串列表
+
+deny_domains（str或list） - 单个值或包含不会被考虑用于提取链接的域的字符串列表
+
+deny_extensions（list） - 包含在提取链接时应该忽略的扩展的单个值或字符串列表。如果没有给出，
+它将默认为IGNORED_EXTENSIONS在scrapy.linkextractors包中定义的 列表 。
+
+restrict_xpaths（str或list） - 是一个XPath（或XPath的列表），它定义响应中应从中提取链接的区域。
+如果给出，只有那些XPath选择的文本将被扫描链接。参见下面的例子。
+
+restrict_css（str或list） - 一个CSS选择器（或选择器列表），用于定义响应中应提取链接的区域。
+有相同的行为restrict_xpaths。
+标签（str或list） - 标签或在提取链接时要考虑的标签列表。默认为。('a', 'area')
+
+attrs（list） - 在查找要提取的链接时应该考虑的属性或属性列表（仅适用于参数中指定的那些标签tags ）。默认为('href',)
+
+canonicalize（boolean） - 规范化每个提取的url（使用w3lib.url.canonicalize_url）。默认为True。
+
+unique（boolean） - 是否应对提取的链接应用重复过滤。
+
+process_value（callable） -
+接收从标签提取的每个值和扫描的属性并且可以修改值并返回新值的函数，或者返回None以完全忽略链接。
+如果没有给出，process_value默认为。

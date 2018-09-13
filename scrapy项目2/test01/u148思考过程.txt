@@ -1,0 +1,10 @@
+//article[starts-with(@class,'postgrid')]//h2/a/text()
+//article[starts-with(@class,'postgrid')]//span[@class='author']/a/text()
+//article[starts-with(@class,'postgrid')]//img/@src
+//article[starts-with(@class,'postgrid')]//div[@class='excerpt']/text()
+
+scrapy crawl u148 
+
+# 1.在pipelines中设置了管道,保存至mysql中,同时在setting中打开pipelines
+# 2.在setting中设置了代理请求头和不遵守爬虫规则
+# 3.在item中设置爬取哪些内容（数据）

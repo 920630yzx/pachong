@@ -1,0 +1,15 @@
+scrapy crawl gupiao-1
+scrapy crawl gupiao-1 -o table.csv
+scrapy crawl gupiao-1 -o table.json
+
+scrapy crawl gupiao-2 --nolog
+
+scrapy crawl gpmysql --nolog
+scrapy crawl gpmysql_2 --nolog
+
+//div[@id='rzrq']/table[@class='m-table']/tbody/tr/td[2]/a/@href   # 链接
+//div[@id='rzrq']/table[@class='m-table']/tbody/tr/td[1]/a/text()  # 股票代码
+//div[@id='rzrq']/table[@class='m-table']/tbody/tr/td[2]/a/text()  # 股票名称
+
+//table[@class='m-table']/tbody/tr  # 链接下的一个表
+//table[@class='m-table']/tbody/tr/td/text()  # 该表的数据

@@ -1,0 +1,11 @@
+scrapy crawl movie --nolog
+
+//table[@class='tbspan']//a[@class='ulink']/text()
+//table[@class='tbspan']//tr[last()]/td/text()
+//table[@class='tbspan']//a[@class='ulink']/@href
+
+http://www.dytt8.net/html/gndy/dyzz/20180831/57349.html
+
+//td[@bgcolor='#fdfddf']/a/@href
+//div[@id='Zoom']//img[1]/@src
+//div[@id='Zoom']

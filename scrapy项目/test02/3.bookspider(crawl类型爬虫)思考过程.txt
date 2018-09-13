@@ -1,0 +1,8 @@
+﻿scrapy crawl bookspider --nolog
+
+http://www.quanwenyuedu.io/    小说网站总页面
+
+http://yishixiejun.quanwenyuedu.io/    单个小说首页面
+
+/1.html   小说第一章入口
+/2.html   小说第二章入口

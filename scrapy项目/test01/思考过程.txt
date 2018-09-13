@@ -1,0 +1,25 @@
+    //ul[@class='listUl']/li[@logr]/div[@class='des']/h2/a[1]/text() # 住房概述
+    //ul[@class='listUl']/li[@logr]/div[@class='des']/p[@class='room']/text()  # 住房面积
+    //ul[@class='listUl']/li[@logr]/div[@class='des']/p[@class='add']/a[1]/text()  # 地址
+    //ul[@class='listUl']/li[@logr]/div[@class='listliright']/div[@class][2]/b/text()  # 费用
+      scrapy crawl wbtc
+      scrapy crawl scrapy-3 
+      scrapy crawl scrapy-item -o table.csv
+      scrapy crawl scrapy-3.2
+      
+    def parse(self, response):  # 定义处理响应函数，函数名必须为parse
+        # li_list = response.xpath("//ul[@class='listUl']/li[@logr]/div[@class='des']/h2/a[1]/text()").extract()
+        # for li in li_list:
+             #print(i)
+        li_list = response.xpath("//ul[@class='listUl']/li[@logr]")  # 另一种写法,拼接式写法
+        for li in li_list:
+            #print(li.xpath("./div[@class='des']/h2/a[1]/text()").extract()[0].strip())  # 会返回一个列表,[0]表示取列表第一个元素,strip()表示去掉去除左右两边的空字符！
+            #print(li.xpath("./div[@class='des']/p[@class='room']/text()").extract()[0].strip())  # strip()表示去掉去除左右两边的空字符！
+            #print(li.xpath("./div[@class='des']/p[@class='add']/a[1]/text()").extract()[0].strip())  # strip()表示去掉去除左右两边的空字符！
+            #print(li.xpath("./div[@class='listliright']/div[@class][2]/b/text()").extract()[0].strip())  # strip()表示去掉去除左右两边的空字符！ 
+            
+        ''' a = li.xpath("./div[@class='des']/p[@class='room']/text()").extract()  # 如果为空则打印'为空!',不为空则正常打印
+            if a:
+               print(a[0].strip())
+            else:
+               print('为空!') '''

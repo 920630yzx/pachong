@@ -1,0 +1,64 @@
+
+
+
+mysql -uroot -proot
+use test
+
+
+
+# 先将uft8文件保存到mysql的方法
+load data local infile 'G:/anaconda/spyder 爬虫/scrapy项目/caijing/300ETF-1.txt'       # 填写路径
+into table gupiao                    # 填写table名称
+character set utf8                   # 设置格式
+fields terminated by '|,|'           # 替换的符号
+enclosed by ''                       # 这里表示替换为空
+lines terminated by '\n'             # 每行空一格
+ignore 1 rows;  # 忽视第一行
+
+# 重新写下：
+load data local infile 'G:/anaconda/spyder 爬虫/scrapy项目/caijing/300ETF-1.txt'      
+into table gupiao
+character set utf8  
+fields terminated by '|,|'           
+enclosed by ''                       
+lines terminated by '\n'
+ignore 1 rows;  # 忽视第一行
+
+
+如果报这个错误：The used command is not allowed with this MySQL version
+那么在进入mysql 的时候加上这个： --local-infile=1 。比如
+mysql -u root -p123456   --local-infile=1 
+
+
+
+我用insert into语句添加了个字段，是中文的，可是select时出来的结果却是???,我只问单纯的MySQL操作，不和任何语言关联，如何才能让mysql存储中文内容
+https://zhidao.baidu.com/question/65668147.html
+MySQL 中何存中文方法如下：
+
+　　1、create table的时候加上：ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+例如：
+create table department
+( 
+id varchar(32) not null,
+name varchar(32) not null,
+score varchar(32) not null) 
+engine=innodb default charset=gbk;
+
+或者：
+create table wbtc
+(
+addr_1 varchar(100),
+addr_2 varchar(100),
+dev varchar(100)
+) default charset=utf8;
+
+　　2、打开MySQL目录下的my.ini文件，把里面所有的default-character-set选项设为GBK或者GB2312，保存后重启MySQL。
+    3、mysql数据库安装的时候。选择语言为gbk，这样在数据库中才可以存放中文。
+
+
+
+
+
+当然还有其他方法，比如：https://jingyan.baidu.com/article/fc07f9891cb56412ffe5199a.html
+其中包含了excel的导入，使用的是naivcat向导式的导入方法，自己看一下；

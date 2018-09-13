@@ -1,0 +1,78 @@
+﻿scrapy crawl weibo --nolog
+
+先登陆微博，这里进入的是手机微博触屏版，而后在随意选择一个微博进入
+比如：https://m.weibo.cn/profile/1642634100   新浪的微博
+在上方的Raw(原始)中第一行POST中获取的url： https://m.weibo.cn/profile/info?uid=1642634100    (HTTP/1.1不要，需舍去)  
+https://m.weibo.cn/p/2304131642634100_-_WEIBO_SECOND_PROFILE_WEIBO 
+进过对比得到：
+https://m.weibo.cn/api/container/getIndex?containerid=2304131642634100_-_WEIBO_SECOND_PROFILE_WEIBO
+https://m.weibo.cn/api/container/getIndex?containerid=2304131642634100_-_WEIBO_SECOND_PROFILE_WEIBO&page_type=03&page=2 
+https://m.weibo.cn/api/container/getIndex?containerid=2304131642634100_-_WEIBO_SECOND_PROFILE_WEIBO&page_type=03&page=3 
+https://m.weibo.cn/api/container/getIndex?containerid=2304131642634100_-_WEIBO_SECOND_PROFILE_WEIBO&page_type=03&page=4 
+
+
+
+关于json的思考
+filename = open("G:/abcd.txt", 'r',encoding='UTF-8')   # 对应于第31行！
+ans1 = filename.read()  # 读取全部内容
+if ans1.startswith(u'\ufeff'):
+   ans1 = ans1.encode('utf8')[3:].decode('utf8')
+ans2 = json.loads(ans1)
+ans3 = ans2['data']['cards']
+len(ans3)
+ans4 = ans3[3]['mblog']['text']
+for i in range(1,len(ans3)):
+    print(i)
+    print(ans3[i]['mblog']['text'])
+
+
+
+打开fiddler抓包工具
+
+Raw(原始)中的信息:  POST,Cookie,password不填
+POST https://passport.weibo.cn/sso/login HTTP/1.1
+Host: passport.weibo.cn
+Connection: keep-alive
+Content-Length: 157
+Origin: https://passport.weibo.cn
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.62 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Accept: */*
+Referer: https://passport.weibo.cn/signin/login?entry=mweibo&r=http%3A%2F%2Fweibo.cn%2Fpub&backTitle=%CE%A2%B2%A9&vt=
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: login=1d143a736fdf93d35dc1b24d4482f559; SCF=AtXOtjhRgr1WBRPZvwJHZMQ5TK5n5ryP0TiF4_xf9x79M1zHe5nbA-YiLXFrjHREHu_f22FOb2GdZx1lfUrx0w0.; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFVmH3jd4zWn6dk-YjWUXMp5JpX5K-hUgL.FoqXSoepSK5E1hq2dJLoIpRLxK-L12qLBoqLxK-LBo5L12qLxK-L1-BL129JdG.t; SUHB=0N2FViiydyLL4x; _T_WM=159e2ab94d0cf712b57fa50c45a5bae6; SUB=_2AkMsA1eedcPxrAVVnvsUyWvgZItH-jyf1j5oAn7oJhMyPRh77kYQqSdutBF-XHEzetfJGyTRZ_e0GcGpcK9bCfmj
+password=920630650408&savestate=1&r=http%3A%2F%2Fweibo.cn%2Fpub&ec=0&pagerefer=&entry=mweibo&wentry=&loginfrom=&client_id=&code=&qq=&mainpageflag=1&hff=&hfp=
+
+
+
+WebForms(表单)中的信息:
+password	920630650408
+savestate	1
+r	http://weibo.cn/pub
+ec	0
+pagerefer	
+entry	mweibo
+wentry	
+loginfrom	
+client_id	
+code	
+qq	
+mainpageflag	1
+hff	
+hfp	
+
+
+
+https://m.weibo.cn/p/2304131642634100_-_WEIBO_SECOND_PROFILE_WEIBO  Raw(原始)中的信息:   Cookie不填
+Host: m.weibo.cn
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.62 Safari/537.36
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: SCF=AtXOtjhRgr1WBRPZvwJHZMQ5TK5n5ryP0TiF4_xf9x79M1zHe5nbA-YiLXFrjHREHu_f22FOb2GdZx1lfUrx0w0.; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9WFVmH3jd4zWn6dk-YjWUXMp5JpX5K-hUgL.FoqXSoepSK5E1hq2dJLoIpRLxK-L12qLBoqLxK-LBo5L12qLxK-L1-BL129JdG.t; _T_WM=159e2ab94d0cf712b57fa50c45a5bae6; SUB=_2A252W6k1DeRhGeBK7VEQ9S7OwzqIHXVVpzd9rDV6PUJbkdANLW_BkW1NR7VmmXYCCcLYGMbOsp9kSRnB8xJ57Jvh; SUHB=0102MwQ1bbpObk; WEIBOCN_FROM=1110006030; MLOGIN=1; M_WEIBOCN_PARAMS=luicode%3D10000011%26lfid%3D2304131642634100_-_WEIBO_SECOND_PROFILE_WEIBO%26uicode%3D20000174
+
+
